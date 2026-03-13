@@ -3,8 +3,8 @@
 ### **Autores:**
 
 - Johan David Diaz Lopez
-- Luis David Peñaranda Perez
 - David Ricardo Marquez Luna
+- Luis David Peñaranda Perez
 - Cristian Camilo Linero Cantillo
 
 **Universidad:** Universidad del Norte 
