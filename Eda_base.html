@@ -1,0 +1,1385 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>3. Análisis Exploratorio de Datos &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Eda_base';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Referencias" href="referencias_bibliograficas.html" />
+    <link rel="prev" title="1. Introducción" href="introduccion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/Logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/Logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Segmentación de Tumores Cerebrales en MRI mediante Aprendizaje Profundo
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduccion.html"><strong>1. Introducción</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>3. Análisis Exploratorio de Datos</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencias_bibliograficas.html"><strong>Referencias</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FEda_base.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Eda_base.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3. Análisis Exploratorio de Datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias">3.1 Librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-estructural-del-dataset">3.2 Distribución estructural del dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-validacion-de-datos-de-segmentacion">3.2.1 Carga y validación de datos de segmentación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-del-dataframe-base">3.2.2 Construcción del DataFrame base</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-metadatos-desde-los-nombres-de-archivo">3.2.3 Extracción de metadatos desde los nombres de archivo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-por-tipo-de-tumor">3.2.4 Distribución por tipo de tumor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-por-plano-de-adquisicion">3.2.5 Distribución por plano de adquisición</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-conjunta-tipo-de-tumor-vs-plano-de-adquisicion">3.2.6 Distribución conjunta: tipo de tumor vs plano de adquisición</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-inicial-del-dataset">3.3 Visualización inicial del dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-dimensiones-de-imagen">3.4 Análisis de dimensiones de imagen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-la-proporcion-del-area-tumoral">3.5 Análisis de la proporción del área tumoral</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mapas-de-calor-de-distribucion-espacial"><strong>3.6 Mapas de calor de distribución espacial</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-perfiles-de-intensidad-y-contraste"><strong>3.7 Análisis de perfiles de intensidad y contraste</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-consistencia-entre-particiones"><strong>3.8 Análisis de Consistencia entre Particiones</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-del-eda-e-implicaciones-para-el-modelado"><strong>3.9 Conclusiones del EDA e Implicaciones para el Modelado</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-de-datos">
+<h1><strong>3. Análisis Exploratorio de Datos</strong><a class="headerlink" href="#analisis-exploratorio-de-datos" title="Permalink to this heading">#</a></h1>
+<p><strong>Estructura del dataset:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>brisc2025/
+└── segmentation_task/
+    ├── train/
+    │   ├── images/
+    │   └── masks/
+    └── test/
+        ├── images/
+        └── masks/
+</pre></div>
+</div>
+<section id="librerias">
+<h2>3.1 Librerias<a class="headerlink" href="#librerias" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;DejaVu Sans&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.titlesize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.labelsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;xtick.labelsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;whitegrid&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Librerías cargadas correctamente.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Librerías cargadas correctamente.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="distribucion-estructural-del-dataset">
+<h2>3.2 Distribución estructural del dataset<a class="headerlink" href="#distribucion-estructural-del-dataset" title="Permalink to this heading">#</a></h2>
+<section id="carga-y-validacion-de-datos-de-segmentacion">
+<h3>3.2.1 Carga y validación de datos de segmentación<a class="headerlink" href="#carga-y-validacion-de-datos-de-segmentacion" title="Permalink to this heading">#</a></h3>
+<p>En esta sección se cargan las imágenes y máscaras correspondientes a la tarea de segmentación. Se valida la consistencia entre ambos conjuntos de datos, asegurando que cada imagen tenga una máscara asociada con el mismo identificador.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\johan\OneDrive - Universidad del Norte\Escritorio\Proyectos academicos\imagenes_tumores_cerebrales\brisc2025&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_images_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;segmentation_task&quot;</span><span class="p">,</span> <span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;images&quot;</span><span class="p">)</span>
+<span class="n">train_masks_path</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;segmentation_task&quot;</span><span class="p">,</span> <span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;masks&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_images_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;segmentation_task&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;images&quot;</span><span class="p">)</span>
+<span class="n">test_masks_path</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;segmentation_task&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;masks&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_images</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">train_images_path</span><span class="p">))</span>
+<span class="n">train_masks</span>  <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">train_masks_path</span><span class="p">))</span>
+
+<span class="n">test_images</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">test_images_path</span><span class="p">))</span>
+<span class="n">test_masks</span>  <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">test_masks_path</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train imágenes:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_images</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train máscaras:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_masks</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test imágenes:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_images</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test máscaras:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_masks</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train imágenes: 3933
+Train máscaras: 3933
+Test imágenes: 860
+Test máscaras: 860
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="construccion-del-dataframe-base">
+<h3>3.2.2 Construcción del DataFrame base<a class="headerlink" href="#construccion-del-dataframe-base" title="Permalink to this heading">#</a></h3>
+<p>Se construye un DataFrame unificado que contiene los nombres de archivo y la partición correspondiente (train/test), permitiendo un manejo estructurado del dataset para análisis posteriores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_img_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">train_images</span><span class="p">]</span>
+<span class="n">train_mask_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.png&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">train_masks</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train match:&quot;</span><span class="p">,</span> <span class="n">train_img_names</span> <span class="o">==</span> <span class="n">train_mask_names</span><span class="p">)</span>
+
+
+<span class="n">test_img_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">test_images</span><span class="p">]</span>
+<span class="n">test_mask_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.png&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">test_masks</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test match:&quot;</span><span class="p">,</span> <span class="n">test_img_names</span> <span class="o">==</span> <span class="n">test_mask_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train match: True
+Test match: True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="n">train_images</span><span class="p">,</span>
+    <span class="s2">&quot;split&quot;</span><span class="p">:</span> <span class="s2">&quot;train&quot;</span>
+<span class="p">})</span>
+
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="n">test_images</span><span class="p">,</span>
+    <span class="s2">&quot;split&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span>
+<span class="p">})</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">train_df</span><span class="p">,</span> <span class="n">test_df</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>filename</th>
+      <th>split</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>brisc2025_train_00001_gl_ax_t1.jpg</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>brisc2025_train_00002_gl_ax_t1.jpg</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>brisc2025_train_00003_gl_ax_t1.jpg</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>brisc2025_train_00004_gl_ax_t1.jpg</td>
+      <td>train</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>brisc2025_train_00005_gl_ax_t1.jpg</td>
+      <td>train</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="extraccion-de-metadatos-desde-los-nombres-de-archivo">
+<h3>3.2.3 Extracción de metadatos desde los nombres de archivo<a class="headerlink" href="#extraccion-de-metadatos-desde-los-nombres-de-archivo" title="Permalink to this heading">#</a></h3>
+<p>A partir de la convención de nombres del dataset, se extrae información relevante como el tipo de tumor, el plano de adquisición y la secuencia de imagen. Este proceso permite enriquecer el DataFrame con variables clave para el análisis exploratorio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">parse_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>
+        <span class="s2">&quot;tumor&quot;</span><span class="p">:</span> <span class="n">parts</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+        <span class="s2">&quot;view&quot;</span><span class="p">:</span> <span class="n">parts</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+        <span class="s2">&quot;sequence&quot;</span><span class="p">:</span> <span class="n">parts</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+    <span class="p">})</span>
+
+<span class="n">metadata</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">parse_filename</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">metadata</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>filename</th>
+      <th>split</th>
+      <th>tumor</th>
+      <th>view</th>
+      <th>sequence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>brisc2025_train_00001_gl_ax_t1.jpg</td>
+      <td>train</td>
+      <td>gl</td>
+      <td>ax</td>
+      <td>t1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>brisc2025_train_00002_gl_ax_t1.jpg</td>
+      <td>train</td>
+      <td>gl</td>
+      <td>ax</td>
+      <td>t1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>brisc2025_train_00003_gl_ax_t1.jpg</td>
+      <td>train</td>
+      <td>gl</td>
+      <td>ax</td>
+      <td>t1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>brisc2025_train_00004_gl_ax_t1.jpg</td>
+      <td>train</td>
+      <td>gl</td>
+      <td>ax</td>
+      <td>t1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>brisc2025_train_00005_gl_ax_t1.jpg</td>
+      <td>train</td>
+      <td>gl</td>
+      <td>ax</td>
+      <td>t1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tumor&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;view&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([&#39;gl&#39;, &#39;me&#39;, &#39;pi&#39;], dtype=object),
+ array([&#39;ax&#39;, &#39;co&#39;, &#39;sa&#39;], dtype=object))
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Nota:</strong> El dataset de segmentación incluye únicamente imágenes con presencia de tumor, excluyendo la clase “no tumor”, ya que estas no cuentan con máscaras asociadas.</p>
+</section>
+<section id="distribucion-por-tipo-de-tumor">
+<h3>3.2.4 Distribución por tipo de tumor<a class="headerlink" href="#distribucion-por-tipo-de-tumor" title="Permalink to this heading">#</a></h3>
+<p>Se analiza la distribución de las imágenes según el tipo de tumor presente, con el fin de identificar posibles desbalances entre clases que puedan influir en el entrenamiento del modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tumor_counts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;tumor&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">tumor_counts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución por tipo de tumor&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tipo de tumor&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Número de imágenes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b0e74549efde924cfd71a596c45571344e11e5044f889700cbda55e80378521d.png" src="_images/b0e74549efde924cfd71a596c45571344e11e5044f889700cbda55e80378521d.png" />
+</div>
+</div>
+<p>El dataset muestra una distribución bastante equilibrada entre las tres categorías de tumores. Al revisar los números, la clase <strong>pituitary</strong> lidera con 1,757 imágenes, seguida de cerca por <strong>meningioma</strong> con 1,635, mientras que <strong>glioma</strong> cuenta con 1,401 muestras.</p>
+<p>Aunque hay una diferencia natural en el volumen de datos entre cada tipo, las proporciones son lo suficientemente cercanas como para considerar que el conjunto de datos es sólido. Esta paridad es un buen punto de partida para el análisis, ya que garantiza que cada patología tenga una representación clara en el dataset y permite identificar las características visuales de cada tumor sin que una clase opaque completamente a las demás.</p>
+</section>
+<section id="distribucion-por-plano-de-adquisicion">
+<h3>3.2.5 Distribución por plano de adquisición<a class="headerlink" href="#distribucion-por-plano-de-adquisicion" title="Permalink to this heading">#</a></h3>
+<p>Se analiza la distribución de las imágenes según el plano de adquisición (axial, coronal y sagital), con el objetivo de evaluar la representatividad de cada vista en el dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">view_counts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;view&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">view_counts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución por plano de adquisición&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Plano&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Número de imágenes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a2ea145237c74b5dd135765e245f78c574c0ff38e851c65171e9ca12b340dad2.png" src="_images/a2ea145237c74b5dd135765e245f78c574c0ff38e851c65171e9ca12b340dad2.png" />
+</div>
+</div>
+<p>Al analizar la distribución por plano de adquisición, se confirma que el dataset mantiene una proporción casi simétrica entre las tres orientaciones anatómicas. Los registros se distribuyen de forma muy uniforme: <strong>el plano coronal cuenta con 1,623 imágenes</strong>, seguido del <strong>axial con 1,589</strong> y <strong>el sagital con 1,581</strong>.</p>
+<p>Esta paridad es un hallazgo clave para los objetivos del proyecto, ya que garantiza que el modelo sea expuesto a una cantidad equivalente de información morfológica desde cada perspectiva. Al no existir un sesgo hacia un plano específico, contamos con una base sólida para desarrollar una de  las contribuciones diferenciadoras de este trabajo: el análisis de rendimiento desagregado por plano anatómico. Esto permitirá evaluar con rigor científico si la arquitectura propuesta generaliza con la misma precisión en cortes horizontales, frontales y laterales.</p>
+</section>
+<section id="distribucion-conjunta-tipo-de-tumor-vs-plano-de-adquisicion">
+<h3>3.2.6 Distribución conjunta: tipo de tumor vs plano de adquisición<a class="headerlink" href="#distribucion-conjunta-tipo-de-tumor-vs-plano-de-adquisicion" title="Permalink to this heading">#</a></h3>
+<p>Se analiza la distribución conjunta entre el tipo de tumor y el plano de adquisición, con el objetivo de identificar posibles sesgos estructurales en el dataset que puedan influir en el desempeño del modelo según la combinación de clase y vista anatómica.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cross_tab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tumor&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;view&quot;</span><span class="p">])</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">cross_tab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución conjunta: tumor vs plano&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tipo de tumor&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Número de imágenes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Plano&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">label_type</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5a6257ae89f5c2f0baec1bbfa577377bebf3dc86e3e239d8c31749d2d95957f8.png" src="_images/5a6257ae89f5c2f0baec1bbfa577377bebf3dc86e3e239d8c31749d2d95957f8.png" />
+</div>
+</div>
+<p>El análisis conjunto entre el tipo de tumor y el plano de adquisición evidencia una distribución altamente uniforme entre ambas variables. En particular, cada clase tumoral se encuentra representada de manera equilibrada en los tres planos anatómicos, sin concentraciones evidentes en una orientación específica.</p>
+<p>Por ejemplo, la clase <em>pituitary</em> (1,757 imágenes) presenta una distribución homogénea entre los planos axial (550), coronal (600) y sagital (607). De manera similar, las clases <em>meningioma</em> y <em>glioma</em> mantienen proporciones consistentes entre vistas, con variaciones menores que no sugieren un sesgo estructural significativo.</p>
+<p>Este comportamiento indica que no existe una dependencia aparente entre el tipo de tumor y el plano de adquisición, lo cual es deseable para el entrenamiento de modelos de segmentación. En particular, esta propiedad permite evaluar la capacidad de generalización del modelo en diferentes orientaciones anatómicas sin que los resultados estén condicionados por desbalances en la distribución de los datos.</p>
+</section>
+</section>
+<section id="visualizacion-inicial-del-dataset">
+<h2>3.3 Visualización inicial del dataset<a class="headerlink" href="#visualizacion-inicial-del-dataset" title="Permalink to this heading">#</a></h2>
+<p>Con el fin de comprender la naturaleza de los datos, se presentan ejemplos representativos de imágenes de resonancia magnética junto con sus respectivas máscaras de segmentación. Esta visualización permite identificar la apariencia de los tumores, así como la variabilidad asociada a los diferentes planos de adquisición.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PLANE_MAP</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ax&#39;</span><span class="p">:</span> <span class="s1">&#39;Axial&#39;</span><span class="p">,</span> <span class="s1">&#39;co&#39;</span><span class="p">:</span> <span class="s1">&#39;Coronal&#39;</span><span class="p">,</span> <span class="s1">&#39;sa&#39;</span><span class="p">:</span> <span class="s1">&#39;Sagital&#39;</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">load_scan_pair</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">base_path</span><span class="p">):</span>
+    <span class="n">split</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;split&quot;</span><span class="p">]</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span>
+    
+    <span class="n">img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;segmentation_task&quot;</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="s2">&quot;images&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="n">mask_name</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;.png&quot;</span><span class="p">)</span>
+    <span class="n">mask_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;segmentation_task&quot;</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="s2">&quot;masks&quot;</span><span class="p">,</span> <span class="n">mask_name</span><span class="p">)</span>
+    
+    <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+    
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">mask_path</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_GRAYSCALE</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">mask</span>
+
+<span class="n">samples</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ax&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;view&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;ax&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="s1">&#39;co&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;view&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;co&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="s1">&#39;sa&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;view&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;sa&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;wspace&#39;</span><span class="p">:</span><span class="mf">0.05</span><span class="p">,</span> <span class="s1">&#39;hspace&#39;</span><span class="p">:</span><span class="mf">0.05</span><span class="p">})</span>
+
+<span class="n">col_titles</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Original</span><span class="se">\n</span><span class="s2">Image&quot;</span><span class="p">,</span> <span class="s2">&quot;Binary</span><span class="se">\n</span><span class="s2">Mask&quot;</span><span class="p">,</span> <span class="s2">&quot;Tumor</span><span class="se">\n</span><span class="s2">Region Overlay&quot;</span><span class="p">]</span>
+<span class="n">planos</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ax&#39;</span><span class="p">,</span> <span class="s1">&#39;co&#39;</span><span class="p">,</span> <span class="s1">&#39;sa&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">plano_code</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">planos</span><span class="p">):</span>
+    
+    <span class="n">row</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="n">plano_code</span><span class="p">]</span>
+    <span class="n">image</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">load_scan_pair</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">base_path</span><span class="p">)</span>
+    
+    <span class="n">overlay</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="n">tumor_mask</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    
+    <span class="n">overlay</span><span class="p">[</span><span class="n">tumor_mask</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    
+    
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">overlay</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">col_titles</span><span class="p">):</span>
+            <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+            
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">PLANE_MAP</span><span class="p">[</span><span class="n">plano_code</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+        <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">spine</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">spine</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+            <span class="n">spine</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c45ebd689c2c32fd2231504017c4daefceb03d77baa0970d60d9e124921c58d8.png" src="_images/c45ebd689c2c32fd2231504017c4daefceb03d77baa0970d60d9e124921c58d8.png" />
+</div>
+</div>
+<p>A partir de la visualización de ejemplos representativos en los tres planos de adquisición (axial, coronal y sagital), se pueden identificar varias características relevantes del dataset.</p>
+<p>En primer lugar, las máscaras de segmentación muestran una correspondencia precisa con las regiones tumorales observables en las imágenes originales, lo que sugiere una alta calidad en las anotaciones. Las regiones marcadas se encuentran bien delimitadas y presentan coherencia espacial con las estructuras anatómicas circundantes.</p>
+<p>Asimismo, se observa una variabilidad significativa en el tamaño, forma y localización de los tumores. Mientras que en algunos casos las regiones tumorales son pequeñas y focalizadas (como en el plano axial), en otros presentan extensiones más amplias y complejas (como en el plano coronal). Esta heterogeneidad incrementa la dificultad del problema de segmentación, ya que el modelo deberá ser capaz de adaptarse a diferentes patrones morfológicos.</p>
+<p>Adicionalmente, las diferencias entre planos evidencian que la apariencia del tumor puede cambiar considerablemente dependiendo de la orientación anatómica. En el plano sagital, por ejemplo, se observan estructuras más fragmentadas, mientras que en el plano coronal las regiones tumorales tienden a ser más continuas y definidas.</p>
+<p>En conjunto, estas observaciones confirman que el problema de segmentación presenta una complejidad significativa, tanto por la variabilidad intra-clase como por las diferencias entre planos, lo que justifica el uso de modelos de deep learning capaces de capturar características espaciales complejas.</p>
+<section id="analisis-de-dimensiones-de-imagen">
+<h3>3.4 Análisis de dimensiones de imagen<a class="headerlink" href="#analisis-de-dimensiones-de-imagen" title="Permalink to this heading">#</a></h3>
+<p>Se analiza la distribución de las dimensiones de las imágenes con el fin de identificar posibles variaciones en el tamaño que puedan afectar el diseño del pipeline de preprocesamiento y el entrenamiento del modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heights</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">widths</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;segmentation_task&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;split&quot;</span><span class="p">],</span> <span class="s2">&quot;images&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">])</span>
+    
+    <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    
+    <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    
+    <span class="n">heights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+    <span class="n">widths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">heights</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">widths</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4793, 4793)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">heights</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Alturas&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;px&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">widths</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Anchuras&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;px&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/43c4698492ceb7672f5f127e7c6c9ab959f26e014259c2b21cd04297ce173347.png" src="_images/43c4698492ceb7672f5f127e7c6c9ab959f26e014259c2b21cd04297ce173347.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">heights</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Alturas&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">widths</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Anchuras&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9e033b4596c389060d50956df70b8adf664d883a8031838cb1c457cefe6297c9.png" src="_images/9e033b4596c389060d50956df70b8adf664d883a8031838cb1c457cefe6297c9.png" />
+</div>
+</div>
+<p>Los gráficos revelan una <strong>heterogeneidad significativa</strong> en las dimensiones de las imágenes del dataset BRISC 2025. A diferencia de otros datasets médicos que vienen pre-procesados a un tamaño fijo (como 512x512), aquí observamos lo siguiente:</p>
+<ol class="arabic simple">
+<li><p><strong>Rango de Variabilidad:</strong></p>
+<ul class="simple">
+<li><p>Las alturas (<strong>Heights</strong>) oscilan principalmente entre 200 y 600 píxeles, con picos notables cerca de los 400 y 500 px.</p></li>
+<li><p>Las anchuras (<strong>Widths</strong>) muestran una dispersión similar, aunque con una concentración ligeramente distinta.</p></li>
+</ul>
+</li>
+<li><p><strong>Implicaciones para el Modelo:</strong></p>
+<ul class="simple">
+<li><p><strong>Resize Obligatorio:</strong> Debido a que las redes neuronales convolucionales (CNN) y las arquitecturas tipo U-Net requieren un tensor de entrada de tamaño constante (ej. <span class="math notranslate nohighlight">\(256 \times 256\)</span> o <span class="math notranslate nohighlight">\(512 \times 512\)</span>), será estrictamente necesario aplicar un paso de redimensionamiento en el preprocesamiento.</p></li>
+<li><p><strong>Aspect Ratio (Relación de Aspecto):</strong> Al observar que no hay un único punto de coincidencia, es probable que muchas imágenes no sean perfectamente cuadradas. Esto implica que al redimensionar, debemos decidir si aplicamos un <em>padding</em> (relleno) para mantener la proporción o si hacemos un <em>resize</em> directo, asumiendo una ligera deformación anatómica.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="analisis-de-la-proporcion-del-area-tumoral">
+<h3>3.5 Análisis de la proporción del área tumoral<a class="headerlink" href="#analisis-de-la-proporcion-del-area-tumoral" title="Permalink to this heading">#</a></h3>
+<p>En tareas de segmentación médica, uno de los desafíos más críticos es el <strong>desbalance de clases a nivel de píxel</strong>. A diferencia de la clasificación de imágenes, donde el desbalance se mide en cantidad de muestras, en segmentación debemos medir qué fracción de la imagen corresponde realmente al objeto de interés (el tumor) frente al fondo (tejido sano y espacio vacío).</p>
+<p>Este análisis es fundamental por dos razones:</p>
+<ol class="arabic simple">
+<li><p><strong>Justificación de la Función de Pérdida:</strong> Si el tumor ocupa un porcentaje muy pequeño de la imagen (por ejemplo, menos del 5%), una función de pérdida convencional como <em>Binary Cross-Entropy</em> puede fallar, ya que el modelo podría alcanzar una precisión engañosa del 95% simplemente prediciendo que todo es fondo. Esto justifica técnicamente el uso de funciones como <strong>Dice Loss</strong> o <strong>IoU Loss</strong>.</p></li>
+<li><p><strong>Dificultad Intrínseca:</strong> Permite identificar si ciertas clases (como los gliomas en planos específicos) son sistemáticamente más pequeñas y, por ende, más difíciles de segmentar.</p></li>
+</ol>
+<p>En esta sección, calcularemos el <strong>Tumor Area Ratio</strong>, definido como la proporción de píxeles pertenecientes a la lesión frente al total de píxeles de la imagen.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_tumor_area_ratio</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">base_path</span><span class="p">):</span>
+    <span class="n">split</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;split&quot;</span><span class="p">]</span>
+    <span class="n">mask_name</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;.png&quot;</span><span class="p">)</span>
+    <span class="n">mask_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;segmentation_task&quot;</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="s2">&quot;masks&quot;</span><span class="p">,</span> <span class="n">mask_name</span><span class="p">)</span>
+    
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">mask_path</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_GRAYSCALE</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    
+    <span class="n">tumor_pixels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+    <span class="n">total_pixels</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">mask</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">tumor_pixels</span> <span class="o">/</span> <span class="n">total_pixels</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;tumor_area_percentage&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">calculate_tumor_area_ratio</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">base_path</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Estadísticas generales del área del tumor (%):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tumor_area_percentage&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Promedio de área por tipo de tumor:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;tumor&quot;</span><span class="p">)[</span><span class="s2">&quot;tumor_area_percentage&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estadísticas generales del área del tumor (%):
+count    4793.000000
+mean        1.885059
+std         1.594635
+min         0.041199
+25%         0.839615
+50%         1.428604
+75%         2.363968
+max        19.609367
+Name: tumor_area_percentage, dtype: float64
+
+Promedio de área por tipo de tumor:
+tumor
+gl    2.056075
+me    2.478362
+pi    1.196589
+Name: tumor_area_percentage, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>El análisis de la proporción del área tumoral revela un escenario de <strong>desbalance extremo de clases a nivel de píxel</strong>, con un promedio general de ocupación de apenas <strong>1.88%</strong>. Esta característica es un indicador crítico de la dificultad de la tarea, ya que el modelo deberá discriminar estructuras de interés en imágenes donde el <strong>98.12%</strong> corresponde a fondo o tejido no patológico.</p>
+<p>Al desglosar por patología, se observan variaciones morfológicas significativas:</p>
+<ul class="simple">
+<li><p><strong>Meningiomas (me):</strong> Presentan la mayor extensión relativa, con un promedio de <strong>2.48%</strong>.</p></li>
+<li><p><strong>Gliomas (gl):</strong> Se sitúan en un rango intermedio con un <strong>2.05%</strong>.</p></li>
+<li><p><strong>Pituitarios (pi):</strong> Constituyen el mayor desafío volumétrico, ocupando solo el <strong>1.19%</strong> de la imagen en promedio.</p></li>
+</ul>
+<p>La presencia de valores atípicos que alcanzan hasta el <strong>19.6%</strong> frente a casos mínimos de <strong>0.04%</strong> subraya la necesidad de implementar funciones de pérdida robustas al desbalance, como <strong>Dice Loss</strong> o <strong>Tversky Loss</strong>, para evitar que el gradiente sea dominado por la clase mayoritaria (fondo).</p>
+</section>
+<section id="mapas-de-calor-de-distribucion-espacial">
+<h3><strong>3.6 Mapas de calor de distribución espacial</strong><a class="headerlink" href="#mapas-de-calor-de-distribucion-espacial" title="Permalink to this heading">#</a></h3>
+<p>Más allá del tamaño, es fundamental comprender la <strong>ubicación preferencial</strong> de los tumores en el espacio bidimensional de las resonancias. La generación de mapas de calor (Heatmaps) permite identificar si existen sesgos de localización asociados a cada tipo de tumor o al plano de adquisición.</p>
+<p>Desde una perspectiva de modelado, si un tumor (como el pituitario) aparece siempre en la misma región anatómica, el modelo podría desarrollar un sesgo de posición en lugar de aprender características texturales. Este análisis valida la necesidad de aumentar los datos mediante traslaciones o rotaciones para mejorar la capacidad de generalización.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_heatmaps</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">base_path</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">)):</span>
+    <span class="n">tumors</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;tumor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="n">views</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;view&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tumors</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">views</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tumor</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">tumors</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">view</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">views</span><span class="p">)):</span>
+            <span class="n">subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tumor&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">tumor</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;view&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">view</span><span class="p">)]</span>
+            
+            <span class="n">accumulated_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">target_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            
+            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subset</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+                <span class="n">m_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;segmentation_task&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;split&quot;</span><span class="p">],</span> <span class="s2">&quot;masks&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;.png&quot;</span><span class="p">))</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">m_path</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_GRAYSCALE</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">mask_res</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">target_size</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_NEAREST</span><span class="p">)</span>
+                    <span class="n">accumulated_mask</span> <span class="o">+=</span> <span class="p">(</span><span class="n">mask_res</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">accumulated_mask</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
+            
+            <span class="n">im</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">accumulated_mask</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">)</span>
+            <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tumor: </span><span class="si">{</span><span class="n">tumor</span><span class="si">}</span><span class="s2"> | Plano: </span><span class="si">{</span><span class="n">view</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+            
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.92</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Mapas de Calor de Distribución Espacial por Tipo de Tumor y Plano&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">generate_heatmaps</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">base_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/abbdd7fdb52bb6ba88a07a18139c746bdf045fc771b91fdb999c62e38292272e.png" src="_images/abbdd7fdb52bb6ba88a07a18139c746bdf045fc771b91fdb999c62e38292272e.png" />
+</div>
+</div>
+<p><strong>Patrones observados:</strong></p>
+<ul class="simple">
+<li><p><strong>Pituitary (pi):</strong> Presenta la mayor focalización espacial, con densidad concentrada en la línea media en cortes coronales y región central inferior en sagitales, correspondiente a la localización anatómica de la silla turca.</p></li>
+<li><p><strong>Meningioma (me):</strong> Distribución bilateral en plano coronal, típica de tumores parasagitales y de convexidad. En sagital, abarca desde región frontal a occipital, consistente con su origen extra-axial.</p></li>
+<li><p><strong>Glioma (gl):</strong> Patrón unilateral difuso en axial, con afectación de sustancia blanca profunda. En sagital, predomina en regiones anteriores y medias.</p></li>
+</ul>
+</section>
+<section id="analisis-de-perfiles-de-intensidad-y-contraste">
+<h3><strong>3.7 Análisis de perfiles de intensidad y contraste</strong><a class="headerlink" href="#analisis-de-perfiles-de-intensidad-y-contraste" title="Permalink to this heading">#</a></h3>
+<p>En imágenes de Resonancia Magnética (MRI), el éxito de la segmentación depende de la diferencia de contraste entre el tejido patológico y el tejido sano circundante. Dado que trabajamos con secuencias T1, es vital entender el rango dinámico de los valores de gris (0-255).</p>
+<p>Este análisis permite determinar:</p>
+<ol class="arabic simple">
+<li><p><strong>Necesidad de Normalización:</strong> Si los histogramas varían mucho entre imágenes, se justifica el uso de <strong>Z-score normalization</strong> o <strong>Min-Max scaling</strong>.</p></li>
+<li><p><strong>Separabilidad Lineal:</strong> Observar si el tumor tiene una firma de intensidad distinta al resto del cerebro o si el ruido de fondo es significativo.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_full_intensity_distribution</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">base_path</span><span class="p">):</span>
+    <span class="n">all_tumor_hist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">all_background_hist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;segmentation_task&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;split&quot;</span><span class="p">],</span> <span class="s2">&quot;images&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">])</span>
+        <span class="n">mask_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;segmentation_task&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;split&quot;</span><span class="p">],</span> <span class="s2">&quot;masks&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;.png&quot;</span><span class="p">))</span>
+        
+        <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_GRAYSCALE</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">mask_path</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_GRAYSCALE</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">img</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">is_tumor</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">&gt;</span> <span class="mi">0</span>
+            <span class="n">is_background</span> <span class="o">=</span> <span class="p">(</span><span class="n">mask</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">img</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
+            
+            <span class="n">all_tumor_hist</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="n">is_tumor</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">all_background_hist</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="n">is_background</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    
+
+    <span class="n">all_tumor_hist</span> <span class="o">/=</span> <span class="n">all_tumor_hist</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">all_background_hist</span> <span class="o">/=</span> <span class="n">all_background_hist</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">all_tumor_hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Región Tumoral&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">all_background_hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tejido Sano/Fondo&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span> <span class="n">all_tumor_hist</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span> <span class="n">all_background_hist</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución Poblacional de Intensidades&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valor de Intensidad de Gris (0-255)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Densidad Probabilística&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plot_full_intensity_distribution</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">base_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/80f00d93024651caa52422372718b930e26ca6d2820c0fa1d10c41556a9949a9.png" src="_images/80f00d93024651caa52422372718b930e26ca6d2820c0fa1d10c41556a9949a9.png" />
+</div>
+</div>
+<p>La imagen muestra la distribución de intensidades de píxeles para región tumoral y tejido sano en todo el dataset (4,793 pares imagen-máscara).</p>
+<p><strong>Observaciones principales:</strong></p>
+<ul class="simple">
+<li><p><strong>Solapamiento significativo:</strong> Ambas distribuciones presentan un rango dinámico similar, con máximos de densidad entre 50 y 150 unidades de gris. No existe un umbral de intensidad que permita separar tumor de tejido sano de manera directa.</p></li>
+<li><p><strong>Cola inferior:</strong> La región tumoral muestra menor densidad en valores bajos (&lt;30), mientras que el tejido sano presenta un pico adicional en esta zona, correspondiente a estructuras como líquido cefalorraquídeo y espacios ventriculares.</p></li>
+<li><p><strong>Distribución unimodal:</strong> Ambas curvas son unimodales, indicando que el contraste entre tejido patológico y sano en secuencias T1 es sutil y requiere características contextuales para una segmentación precisa.</p></li>
+</ul>
+</section>
+<section id="analisis-de-consistencia-entre-particiones">
+<h3><strong>3.8 Análisis de Consistencia entre Particiones</strong><a class="headerlink" href="#analisis-de-consistencia-entre-particiones" title="Permalink to this heading">#</a></h3>
+<p>Un aspecto crítico en la metodología de investigación es garantizar que no exista un sesgo significativo entre el conjunto de entrenamiento y el de prueba. Si las imágenes de prueba fueran sistemáticamente más brillantes, más grandes o con tumores de distinto tamaño que las de entrenamiento, los resultados del modelo no serían fiables.</p>
+<p>Para validar la homogeneidad del dataset, realizamos una comparación estadística de la intensidad media de los píxeles y el área tumoral entre las particiones <code class="docutils literal notranslate"><span class="pre">train</span></code> y <code class="docutils literal notranslate"><span class="pre">test</span></code>. Utilizaremos la prueba no paramétrica de <strong>Mann-Whitney U</strong>, la cual es robusta y no asume una distribución normal de los datos, para determinar si existen diferencias significativas (<span class="math notranslate nohighlight">\(p &lt; 0.05\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">perform_homogeneity_test</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    
+    <span class="n">train_areas</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;tumor_area_percentage&#39;</span><span class="p">]</span>
+    <span class="n">test_areas</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span><span class="p">][</span><span class="s1">&#39;tumor_area_percentage&#39;</span><span class="p">]</span>
+    
+    <span class="n">u_stat_area</span><span class="p">,</span> <span class="n">p_val_area</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">mannwhitneyu</span><span class="p">(</span><span class="n">train_areas</span><span class="p">,</span> <span class="n">test_areas</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_mean_intensity</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+        <span class="n">img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="s2">&quot;segmentation_task&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;split&quot;</span><span class="p">],</span> <span class="s2">&quot;images&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">])</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_GRAYSCALE</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="k">if</span> <span class="n">img</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;mean_intensity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_mean_intensity</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">train_ints</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="s1">&#39;mean_intensity&#39;</span><span class="p">]</span>
+    <span class="n">test_ints</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;test&#39;</span><span class="p">][</span><span class="s1">&#39;mean_intensity&#39;</span><span class="p">]</span>
+    
+    <span class="n">u_stat_int</span><span class="p">,</span> <span class="n">p_val_int</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">mannwhitneyu</span><span class="p">(</span><span class="n">train_ints</span><span class="p">,</span> <span class="n">test_ints</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Área Tumoral:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   p-valor = </span><span class="si">{</span><span class="n">p_val_area</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Resultado: &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;Diferencia significativa&quot;</span> <span class="k">if</span> <span class="n">p_val_area</span> <span class="o">&lt;</span> <span class="mf">0.05</span> <span class="k">else</span> <span class="s2">&quot;Particiones homogéneas&quot;</span><span class="p">))</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Intensidad Media (Brillo):&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   p-valor = </span><span class="si">{</span><span class="n">p_val_int</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Resultado: &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;Diferencia significativa&quot;</span> <span class="k">if</span> <span class="n">p_val_int</span> <span class="o">&lt;</span> <span class="mf">0.05</span> <span class="k">else</span> <span class="s2">&quot;Particiones homogéneas&quot;</span><span class="p">))</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;tumor_area_percentage&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de Áreas: Train vs Test&quot;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;mean_intensity&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;split&#39;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de Intensidades: Train vs Test&quot;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">perform_homogeneity_test</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1. Área Tumoral:
+   p-valor = 0.5183
+   Resultado: Particiones homogéneas
+
+2. Intensidad Media (Brillo):
+   p-valor = 0.0026
+   Resultado: Diferencia significativa
+</pre></div>
+</div>
+<img alt="_images/2ba4f6c17dff5e8e316b9ca9263edb902c1904e4b51baf53a01b281d26164278.png" src="_images/2ba4f6c17dff5e8e316b9ca9263edb902c1904e4b51baf53a01b281d26164278.png" />
+</div>
+</div>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Métrica</strong></p></th>
+<th class="head"><p><strong>p-valor</strong></p></th>
+<th class="head"><p><strong>Resultado</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Área Tumoral</p></td>
+<td><p>0.5183</p></td>
+<td><p>Homogéneo</p></td>
+</tr>
+<tr class="row-odd"><td><p>Intensidad Media</p></td>
+<td><p>0.0026</p></td>
+<td><p>Diferencia significativa</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><strong>Área tumoral:</strong> No se detectan diferencias significativas entre particiones (p &gt; 0.05). La distribución del tamaño de los tumores es consistente, lo que garantiza que la evaluación del modelo no estará sesgada por esta variable.</p></li>
+<li><p><strong>Intensidad media:</strong> Se observa una diferencia estadísticamente significativa (p &lt; 0.05) entre la intensidad media de las imágenes en train y test. La visualización sugiere que las imágenes de prueba presentan sistemáticamente valores de brillo ligeramente inferiores.</p></li>
+</ul>
+<p><strong>Implicaciones para el modelado:</strong> La diferencia en intensidad refuerza la necesidad de aplicar <strong>normalización por imagen</strong> (Z-score o Min-Max) en el preprocesamiento, en lugar de una normalización global. Este enfoque mitigará las diferencias de brillo entre particiones y mejorará la capacidad de generalización del modelo.</p>
+</section>
+<section id="conclusiones-del-eda-e-implicaciones-para-el-modelado">
+<h3><strong>3.9 Conclusiones del EDA e Implicaciones para el Modelado</strong><a class="headerlink" href="#conclusiones-del-eda-e-implicaciones-para-el-modelado" title="Permalink to this heading">#</a></h3>
+<p>Tras el análisis exploratorio del dataset BRISC 2025, se han identificado patrones clave que sugieren las siguientes estrategias para la etapa de modelado:</p>
+<ol class="arabic simple">
+<li><p><strong>Estandarización de dimensiones:</strong> Debido a que el dataset presenta una variabilidad considerable en las resoluciones originales (entre 200 y 600 píxeles), se propone evaluar un redimensionamiento estándar a <strong>256x256 píxeles</strong>. Esta transformación permitiría la compatibilidad con arquitecturas convolucionales clásicas, aunque deberá analizarse si la deformación anatómica resultante afecta la precisión en estructuras pequeñas.</p></li>
+<li><p><strong>Estrategia frente al sesgo de intensidad:</strong> El hallazgo de una diferencia estadísticamente significativa en el brillo medio entre <em>train</em> y <em>test</em> (<span class="math notranslate nohighlight">\(p = 0.0026\)</span>) sugiere que una normalización global podría ser insuficiente. Como posible solución, se plantea el uso de <strong>normalización Z-score por instancia</strong>, procesando cada imagen de forma independiente para intentar mitigar este desbalance y mejorar la estabilidad del aprendizaje.</p></li>
+<li><p><strong>Abordaje del desbalance de píxeles (Sparsity):</strong> Con una carga tumoral media de apenas el <strong>1.88%</strong>, el problema se perfila como una tarea de segmentación de objetos pequeños. Bajo este escenario, es probable que funciones de pérdida basadas en la superposición espacial, como <strong>Dice Loss o variantes de Tversky</strong>, ofrezcan una señal de gradiente más útil que la entropía cruzada convencional, punto que deberá ser validado empíricamente.</p></li>
+<li><p><strong>Aumentación de datos y robustez espacial:</strong> Los mapas de calor revelaron que los tumores tienden a concentrarse en regiones específicas según su categoría. Para evitar que el modelo genere un sesgo de localización, consideraremos técnicas de <strong>Data Augmentation</strong> (rotaciones, traslaciones y espejados). El objetivo sería forzar a la red a identificar texturas y formas en lugar de depender de la ubicación absoluta de los píxeles.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="introduccion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>1. Introducción</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="referencias_bibliograficas.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Referencias</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias">3.1 Librerias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-estructural-del-dataset">3.2 Distribución estructural del dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-validacion-de-datos-de-segmentacion">3.2.1 Carga y validación de datos de segmentación</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-del-dataframe-base">3.2.2 Construcción del DataFrame base</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-metadatos-desde-los-nombres-de-archivo">3.2.3 Extracción de metadatos desde los nombres de archivo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-por-tipo-de-tumor">3.2.4 Distribución por tipo de tumor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-por-plano-de-adquisicion">3.2.5 Distribución por plano de adquisición</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-conjunta-tipo-de-tumor-vs-plano-de-adquisicion">3.2.6 Distribución conjunta: tipo de tumor vs plano de adquisición</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-inicial-del-dataset">3.3 Visualización inicial del dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-dimensiones-de-imagen">3.4 Análisis de dimensiones de imagen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-la-proporcion-del-area-tumoral">3.5 Análisis de la proporción del área tumoral</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mapas-de-calor-de-distribucion-espacial"><strong>3.6 Mapas de calor de distribución espacial</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-perfiles-de-intensidad-y-contraste"><strong>3.7 Análisis de perfiles de intensidad y contraste</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-consistencia-entre-particiones"><strong>3.8 Análisis de Consistencia entre Particiones</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-del-eda-e-implicaciones-para-el-modelado"><strong>3.9 Conclusiones del EDA e Implicaciones para el Modelado</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

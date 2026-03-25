@@ -1,34 +1,29 @@
-# **Segmentación de Tumores Cerebrales en Imágenes MRI mediante Deep Learning**
+# **Segmentación de Tumores Cerebrales en MRI mediante Aprendizaje Profundo**
 
-### **Autores:**
+**Autores:**
 
-- Johan David Diaz Lopez
-- David Ricardo Marquez Luna
-- Cristian Camilo Linero Cantillo
-- Luis David Peñaranda Perez
+Johan David Díaz López
 
-**Universidad:** Universidad del Norte 
+David Ricardo Márquez Luna
 
-**Programa:** Ciencia de Datos
+Cristian Camilo Linero Cantillo
 
-**Profesores:** Dr. Lihki Rubio, Dra. Karen Florez
+Luis David Peñaranda Pérez
+
+**Universidad:** Universidad del Norte
+
+**Programa:** Ciencia de Datos  
+
+**Profesores:** Dr. Lihki Rubio · Dra. Karen Florez
 
 **Año:** 2026
 
----
+## Abstract
 
-### **Abstract**
+Este trabajo presenta un estudio sistemático de segmentación pixel a pixel de tumores cerebrales en imágenes de Resonancia Magnética T1, utilizando el dataset BRISC 2025 — un conjunto de datos anotadas por radiólogos certificados, que incluye glioma, meningioma, tumor hipofisario y casos no tumorales en tres planos anatómicos. Se reproducen modelos benchmark establecidos (U-Net, Attention U-Net, TransUNet, Swin-UNet) y se propone una arquitectura original que supera el estado del arte reportado, contribuyendo además con un análisis inédito de rendimiento desagregado por plano anatómico.
 
-La segmentación automática de tumores cerebrales en imágenes de resonancia magnética (MRI) constituye un problema central en el campo de la imagen médica asistida por inteligencia artificial. A diferencia de los enfoques de clasificación, la segmentación permite identificar con precisión la localización espacial del tumor mediante la predicción de máscaras binarias a nivel de píxel, lo que resulta clínicamente más útil para el diagnóstico, la planificación quirúrgica y el seguimiento del tratamiento.
+**Keywords:** Segmentación semántica · Tumores cerebrales · MRI T1 · U-Net · Vision Transformer · BRISC 2025 · Diagnóstico asistido por IA
 
-En este trabajo se desarrolla un sistema basado en *deep learning* para la segmentación de tumores cerebrales utilizando el dataset **BRISC**, un conjunto reciente de imágenes MRI anotadas por expertos y diseñado para tareas de análisis de tumores cerebrales {cite}`fateh2026brisc`. El proyecto incluye un análisis exploratorio detallado del dataset, la reproducción de modelos baseline ampliamente utilizados en segmentación médica como **U-Net, Attention U-Net, UNet++ y DeepLabV3+** y el diseño de una arquitectura original orientada a superar los benchmarks reportados.
-
-El objetivo final es identificar las limitaciones de los modelos existentes mediante un análisis sistemático de errores y proponer mejoras arquitectónicas que permitan incrementar el rendimiento en términos de **Intersection over Union (IoU)** y **Dice coefficient**, contribuyendo así al desarrollo de herramientas de apoyo al diagnóstico en neuroimagen.
-
----
-
-**Keywords:**
-Brain Tumor Segmentation, MRI, Deep Learning, Medical Image Segmentation
 
 ```{tableofcontents}
 ```
