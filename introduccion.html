@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'introduccion';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Análisis Exploratorio de Datos" href="Eda_base.html" />
+    <link rel="next" title="2. Revisión de Literatura" href="revision_literatura.html" />
     <link rel="prev" title="Segmentación de Tumores Cerebrales en MRI mediante Aprendizaje Profundo" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -158,7 +158,10 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>1. Introducción</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Eda_base.html"><strong>3. Análisis Exploratorio de Datos</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="revision_literatura.html"><strong>2. Revisión de Literatura</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="eda.html"><strong>3. Analisis exploratorio de datos</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocesamiento.html"><strong>4. Preprocesamiento y Diseño de DataLoaders</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html"><strong>5. Benchmarks de Segmentación</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencias_bibliograficas.html"><strong>Referencias</strong></a></li>
 </ul>
 
@@ -377,19 +380,21 @@ document.write(`
 <p>Los tumores cerebrales se encuentran entre las condiciones médicas más críticas a nivel mundial,
 con una incidencia estimada de 308.102 nuevos casos y 251.329 muertes reportadas globalmente
 en 2020, según datos de la Organización Mundial de la Salud. Su impacto en la expectativa y
-calidad de vida de los pacientes es severo, particularmente en los tumores malignos de alto grado
-como el glioblastoma, cuya tasa de supervivencia a cinco años no supera el 5%. La detección
-temprana y la caracterización precisa del tumor son determinantes en el pronóstico del paciente,
-ya que permiten planificar intervenciones quirúrgicas, radioterapia y quimioterapia de forma
-oportuna y personalizada <span id="id1">[<a class="reference internal" href="referencias_bibliograficas.html#id3" title="J. R. McFaline-Figueroa and E. Q. Lee. Brain tumors. The American Journal of Medicine, 131(8):874–882, 2018. doi:10.1016/j.amjmed.2017.12.039.">MFL18</a>]</span>.</p>
+calidad de vida de los pacientes es severo, particularmente en los tumores malignos de alto
+grado como el glioblastoma, cuya tasa de supervivencia a cinco años no supera el 5%. La
+detección temprana y la caracterización precisa del tumor son determinantes en el pronóstico
+del paciente, ya que permiten planificar intervenciones quirúrgicas, radioterapia y
+quimioterapia de forma oportuna y personalizada <span id="id1">[<a class="reference internal" href="referencias_bibliograficas.html#id3" title="J. R. McFaline-Figueroa and E. Q. Lee. Brain tumors. The American Journal of Medicine, 131(8):874–882, 2018. doi:10.1016/j.amjmed.2017.12.039.">MFL18</a>]</span>.</p>
 <p>Los tumores cerebrales se clasifican en primarios, cuando se originan en células del propio
 cerebro, y secundarios o metastásicos, cuando provienen de otros órganos. Entre los primarios,
 el glioma representa el 78% de los tumores malignos en adultos, mientras que el meningioma es
 el tipo benigno más frecuente. El tumor hipofisario, aunque generalmente benigno, puede afectar
 significativamente funciones endocrinas y visuales. La clasificación de la Organización Mundial
 de la Salud estratifica estos tumores en cuatro grados según su tasa de crecimiento, malignidad
-y capacidad invasiva, lo que determina directamente el protocolo de tratamiento <span id="id2">[<a class="reference internal" href="referencias_bibliograficas.html#id4" title="L. M. DeAngelis. Brain tumors. New England Journal of Medicine, 344(2):114–123, 2001. doi:10.1056/NEJM200101113440207.">DeA01</a>]</span>.</p>
+y capacidad invasiva, lo que determina directamente el protocolo de tratamiento
+<span id="id2">[<a class="reference internal" href="referencias_bibliograficas.html#id4" title="L. M. DeAngelis. Brain tumors. New England Journal of Medicine, 344(2):114–123, 2001. doi:10.1056/NEJM200101113440207.">DeA01</a>]</span>.</p>
 </section>
+<hr class="docutils" />
 <section id="el-rol-de-la-resonancia-magnetica-y-sus-limitaciones-actuales">
 <h2>1.2 El Rol de la Resonancia Magnética y sus Limitaciones Actuales<a class="headerlink" href="#el-rol-de-la-resonancia-magnetica-y-sus-limitaciones-actuales" title="Permalink to this heading">#</a></h2>
 <figure class="align-center" id="fig-tumores-cerebrales">
@@ -402,81 +407,97 @@ y capacidad invasiva, lo que determina directamente el protocolo de tratamiento 
 cerebrales, gracias a su capacidad de generar imágenes de alta resolución de las estructuras
 cerebrales de forma no invasiva y sin radiación ionizante. Las imágenes ponderadas en T1 con
 contraste, en particular, destacan con precisión los límites del tumor al realzar las regiones
-con ruptura de la barrera hematoencefálica, característica distintiva de los tumores de alto grado
-<span id="id3">[<a class="reference internal" href="referencias_bibliograficas.html#id2" title="Amirreza Fateh, Yasin Rezvani, Sara Moayedi, Sadjad Rezvani, Fatemeh Fateh, Mansoor Fateh, and Vahid Abolghasemi. Brisc: annotated dataset for brain tumor segmentation and classification. Scientific Data, 13(1):361, 2026. doi:10.1038/s41597-026-06753-y.">FRM+26</a>]</span>.</p>
+con ruptura de la barrera hematoencefálica, característica distintiva de los tumores de alto
+grado <span id="id3">[<a class="reference internal" href="referencias_bibliograficas.html#id2" title="Amirreza Fateh, Yasin Rezvani, Sara Moayedi, Sadjad Rezvani, Fatemeh Fateh, Mansoor Fateh, and Vahid Abolghasemi. Brisc: annotated dataset for brain tumor segmentation and classification. Scientific Data, 13(1):361, 2026. doi:10.1038/s41597-026-06753-y.">FRM+26</a>]</span>.</p>
 <p>Sin embargo, el análisis manual de estas imágenes por parte de radiólogos y neurólogos es un
 proceso altamente demandante en tiempo y sujeto a variabilidad inter-observador. Un estudio
 completo de MRI cerebral puede contener cientos de cortes en múltiples planos anatómicos, y la
 delineación manual del volumen tumoral — necesaria para planificación quirúrgica y radioterapia —
 puede tomar entre una y cuatro horas por paciente. Esta realidad, combinada con la escasez de
 especialistas en muchas regiones del mundo, crea una necesidad urgente de sistemas automatizados
-que asistan en la detección, localización y segmentación de tumores cerebrales <span id="id4">[<a class="reference internal" href="referencias_bibliograficas.html#id5" title="Bjoern H. Menze, Andras Jakab, Stefan Bauer, and others. The multimodal brain tumor image segmentation benchmark (BRATS). IEEE Transactions on Medical Imaging, 34(10):1993–2024, 2015. doi:10.1109/TMI.2014.2377694.">MJB+15</a>]</span>.</p>
+que asistan en la detección, localización y segmentación de tumores cerebrales
+<span id="id4">[<a class="reference internal" href="referencias_bibliograficas.html#id5" title="Bjoern H. Menze, Andras Jakab, Stefan Bauer, and others. The multimodal brain tumor image segmentation benchmark (BRATS). IEEE Transactions on Medical Imaging, 34(10):1993–2024, 2015. doi:10.1109/TMI.2014.2377694.">MJB+15</a>]</span>.</p>
 </section>
+<hr class="docutils" />
 <section id="el-problema-de-la-segmentacion-automatizada">
 <h2>1.3 El Problema de la Segmentación Automatizada<a class="headerlink" href="#el-problema-de-la-segmentacion-automatizada" title="Permalink to this heading">#</a></h2>
-<figure class="align-center" id="id5">
+<figure class="align-center" id="fig-segmentacion">
 <a class="reference internal image-reference" href="_images/imagen_1.png"><img alt="_images/imagen_1.png" src="_images/imagen_1.png" style="width: 700px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Flujo de trabajo de segmentación de tumores cerebrales. De izquierda a derecha: resonancia magnética T2-FLAIR original, máscara de segmentación de referencia y superposición de la predicción del modelo.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Flujo de trabajo de segmentación de tumores cerebrales. De izquierda a derecha: resonancia
+magnética T2-FLAIR original, máscara de segmentación de referencia y superposición de la
+predicción del modelo.</span><a class="headerlink" href="#fig-segmentacion" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>La segmentación automática de tumores cerebrales en MRI es un problema de visión por computadora
-que consiste en asignar una etiqueta a cada píxel de la imagen, distinguiendo el tejido tumoral
-del tejido cerebral sano. A diferencia de la clasificación a nivel de imagen, la segmentación
-exige que el modelo comprenda tanto el contexto global de la imagen como los detalles locales
-a nivel de píxel, lo que representa un reto técnico considerablemente mayor <span id="id6">[<a class="reference internal" href="referencias_bibliograficas.html#id2" title="Amirreza Fateh, Yasin Rezvani, Sara Moayedi, Sadjad Rezvani, Fatemeh Fateh, Mansoor Fateh, and Vahid Abolghasemi. Brisc: annotated dataset for brain tumor segmentation and classification. Scientific Data, 13(1):361, 2026. doi:10.1038/s41597-026-06753-y.">FRM+26</a>]</span>.</p>
+<p>La segmentación automática de tumores cerebrales en MRI es un problema de visión por
+computadora que consiste en asignar una etiqueta a cada píxel de la imagen, distinguiendo el
+tejido tumoral del tejido cerebral sano. A diferencia de la clasificación a nivel de imagen,
+la segmentación exige que el modelo comprenda tanto el contexto global de la imagen como los
+detalles locales a nivel de píxel, lo que representa un reto técnico considerablemente mayor
+<span id="id5">[<a class="reference internal" href="referencias_bibliograficas.html#id2" title="Amirreza Fateh, Yasin Rezvani, Sara Moayedi, Sadjad Rezvani, Fatemeh Fateh, Mansoor Fateh, and Vahid Abolghasemi. Brisc: annotated dataset for brain tumor segmentation and classification. Scientific Data, 13(1):361, 2026. doi:10.1038/s41597-026-06753-y.">FRM+26</a>]</span>.</p>
 <p>Las principales dificultades de este problema incluyen la alta variabilidad morfológica de los
 tumores, cuya forma, tamaño y localización difieren significativamente entre pacientes y tipos
 tumorales; la irregularidad en el contraste y la intensidad de señal en las regiones tumorales;
 la similitud visual entre tejido tumoral y estructuras sanas adyacentes; y la presencia de
 artefactos de adquisición propios del entorno clínico. Estas características hacen que los
 modelos entrenados en condiciones controladas enfrenten desafíos importantes al ser aplicados
-en escenarios reales <span id="id7">[<a class="reference internal" href="referencias_bibliograficas.html#id5" title="Bjoern H. Menze, Andras Jakab, Stefan Bauer, and others. The multimodal brain tumor image segmentation benchmark (BRATS). IEEE Transactions on Medical Imaging, 34(10):1993–2024, 2015. doi:10.1109/TMI.2014.2377694.">MJB+15</a>]</span>.</p>
+en escenarios reales <span id="id6">[<a class="reference internal" href="referencias_bibliograficas.html#id5" title="Bjoern H. Menze, Andras Jakab, Stefan Bauer, and others. The multimodal brain tumor image segmentation benchmark (BRATS). IEEE Transactions on Medical Imaging, 34(10):1993–2024, 2015. doi:10.1109/TMI.2014.2377694.">MJB+15</a>]</span>, <span id="id7">[<a class="reference internal" href="referencias_bibliograficas.html#id18" title="Aminu Musa, Rajesh Prasad, Peter Onwualu, and Monica Hernandez. A systematic review of cross-population shifts in medical imaging analysis with deep learning. Big Data and Cognitive Computing, 10(3):76, 2026. doi:10.3390/bdcc10030076.">MPOH26</a>]</span>.</p>
 </section>
+<hr class="docutils" />
 <section id="avances-en-deep-learning-para-segmentacion-medica">
 <h2>1.4 Avances en Deep Learning para Segmentación Médica<a class="headerlink" href="#avances-en-deep-learning-para-segmentacion-medica" title="Permalink to this heading">#</a></h2>
 <p>En la última década, el aprendizaje profundo ha transformado el campo de la segmentación de
 imágenes médicas. La arquitectura U-Net, propuesta por Ronneberger et al. en 2015, estableció
 el paradigma encoder-decoder con conexiones de salto que se convirtió en el estándar de
 referencia para segmentación médica <span id="id8">[<a class="reference internal" href="referencias_bibliograficas.html#id6" title="Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. In Medical Image Computing and Computer-Assisted Intervention – MICCAI 2015, 234–241. 2015. doi:10.1007/978-3-319-24574-4_28.">RFB15</a>]</span>. Desde entonces, variantes como
-Attention U-Net, que incorpora mecanismos de atención en las conexiones de salto <span id="id9">[<a class="reference internal" href="referencias_bibliograficas.html#id7" title="Ozan Oktay, Jo Schlemper, Loic Le Folgoc, and others. Attention u-net: learning where to look for the pancreas. arXiv preprint arXiv:1804.03999, 2018.">OSLF+18</a>]</span>,
-y arquitecturas híbridas como TransUNet <span id="id10">[<a class="reference internal" href="referencias_bibliograficas.html#id8" title="Jieneng Chen, Yongyi Lu, Qihang Yu, and others. Transunet: transformers make strong encoders for medical image segmentation. arXiv preprint arXiv:2102.04306, 2021.">CLY+21</a>]</span> y Swin-UNet <span id="id11">[<a class="reference internal" href="referencias_bibliograficas.html#id9" title="Hu Cao, Yueyue Wang, Joy Chen, and others. Swin-unet: unet-like pure transformer for medical image segmentation. In European Conference on Computer Vision Workshops. 2022. doi:10.1007/978-3-031-25066-8_9.">CWC+22</a>]</span>,
-que integran Vision Transformers para capturar dependencias de largo alcance, han demostrado
-mejoras progresivas en benchmarks establecidos.</p>
+Attention U-Net, que incorpora mecanismos de atención en las conexiones de salto
+<span id="id9">[<a class="reference internal" href="referencias_bibliograficas.html#id7" title="Ozan Oktay, Jo Schlemper, Loic Le Folgoc, and others. Attention u-net: learning where to look for the pancreas. arXiv preprint arXiv:1804.03999, 2018.">OSLF+18</a>]</span>, y arquitecturas híbridas como TransUNet <span id="id10">[<a class="reference internal" href="referencias_bibliograficas.html#id8" title="Jieneng Chen, Yongyi Lu, Qihang Yu, and others. Transunet: transformers make strong encoders for medical image segmentation. arXiv preprint arXiv:2102.04306, 2021.">CLY+21</a>]</span>
+y Swin-UNet <span id="id11">[<a class="reference internal" href="referencias_bibliograficas.html#id9" title="Hu Cao, Yueyue Wang, Joy Chen, and others. Swin-unet: unet-like pure transformer for medical image segmentation. In European Conference on Computer Vision Workshops. 2022. doi:10.1007/978-3-031-25066-8_9.">CWC+22</a>]</span>, que integran Vision Transformers para capturar dependencias
+de largo alcance, han demostrado mejoras progresivas en benchmarks establecidos. De forma
+paralela, módulos de atención ligeros como CBAM <span id="id12">[<a class="reference internal" href="referencias_bibliograficas.html#id11" title="Sanghyun Woo, Jongchan Park, Joon-Young Lee, and In So Kweon. CBAM: convolutional block attention module. In European Conference on Computer Vision (ECCV), 3–19. 2018. doi:10.1007/978-3-030-01234-2_1.">WPLK18</a>]</span> han permitido incorporar
+recalibración de características de canal y espacial sin incrementar sustancialmente el costo
+computacional, con resultados prometedores en tareas de análisis de tumores cerebrales
+<span id="id13">[<a class="reference internal" href="referencias_bibliograficas.html#id12" title="Rizal Dwi Prayogo, Siti Amatullah Karimah, and Hidetaka Nambo. Hayabusanet: hybrid attention-based multiscale fusion CNN for accurate and efficient brain tumor classification in MRI scans. Preprint submitted to Elsevier (SSRN), 2026. URL: https://ssrn.com/abstract=6486052.">PKN26</a>]</span>.</p>
 <p>No obstante, el progreso en este campo ha estado limitado en parte por la disponibilidad de
 datasets de alta calidad. Colecciones ampliamente usadas como el dataset Cheng o los datasets
 de Kaggle presentan problemas de desbalance de clases, inconsistencias en las anotaciones y
 falta de diversidad en las condiciones de adquisición. El dataset BraTS, aunque comprehensivo,
-se enfoca exclusivamente en gliomas y utiliza datos preprocesados que no reflejan la variabilidad
-real del entorno clínico <span id="id12">[<a class="reference internal" href="referencias_bibliograficas.html#id5" title="Bjoern H. Menze, Andras Jakab, Stefan Bauer, and others. The multimodal brain tumor image segmentation benchmark (BRATS). IEEE Transactions on Medical Imaging, 34(10):1993–2024, 2015. doi:10.1109/TMI.2014.2377694.">MJB+15</a>]</span>. Estas limitaciones restringen la
-generalización de los modelos desarrollados sobre ellos <span id="id13">[<a class="reference internal" href="referencias_bibliograficas.html#id2" title="Amirreza Fateh, Yasin Rezvani, Sara Moayedi, Sadjad Rezvani, Fatemeh Fateh, Mansoor Fateh, and Vahid Abolghasemi. Brisc: annotated dataset for brain tumor segmentation and classification. Scientific Data, 13(1):361, 2026. doi:10.1038/s41597-026-06753-y.">FRM+26</a>]</span>.</p>
+se enfoca exclusivamente en gliomas y utiliza datos preprocesados que no reflejan la
+variabilidad real del entorno clínico <span id="id14">[<a class="reference internal" href="referencias_bibliograficas.html#id5" title="Bjoern H. Menze, Andras Jakab, Stefan Bauer, and others. The multimodal brain tumor image segmentation benchmark (BRATS). IEEE Transactions on Medical Imaging, 34(10):1993–2024, 2015. doi:10.1109/TMI.2014.2377694.">MJB+15</a>]</span>. Estas limitaciones
+restringen la generalización de los modelos desarrollados sobre ellos <span id="id15">[<a class="reference internal" href="referencias_bibliograficas.html#id2" title="Amirreza Fateh, Yasin Rezvani, Sara Moayedi, Sadjad Rezvani, Fatemeh Fateh, Mansoor Fateh, and Vahid Abolghasemi. Brisc: annotated dataset for brain tumor segmentation and classification. Scientific Data, 13(1):361, 2026. doi:10.1038/s41597-026-06753-y.">FRM+26</a>]</span>.</p>
 </section>
+<hr class="docutils" />
 <section id="gap-en-la-literatura-y-motivacion">
 <h2>1.5 Gap en la Literatura y Motivación<a class="headerlink" href="#gap-en-la-literatura-y-motivacion" title="Permalink to this heading">#</a></h2>
-<figure class="align-center" id="id14">
+<figure class="align-center" id="fig-planos">
 <a class="reference internal image-reference" href="_images/imagen_2.png"><img alt="_images/imagen_2.png" src="_images/imagen_2.png" style="width: 700px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Planos cerebrales ortogonales. Visualización de secciones axiales, coronales y sagitales.</span><a class="headerlink" href="#id14" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Planos cerebrales ortogonales. Visualización de secciones axiales, coronales y sagitales.</span><a class="headerlink" href="#fig-planos" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>En este contexto, Fateh et al. presentaron en 2026 el dataset BRISC (BRain tumor Image
-Segmentation and Classification), publicado en Scientific Data de Nature Portfolio <span id="id15">[<a class="reference internal" href="referencias_bibliograficas.html#id2" title="Amirreza Fateh, Yasin Rezvani, Sara Moayedi, Sadjad Rezvani, Fatemeh Fateh, Mansoor Fateh, and Vahid Abolghasemi. Brisc: annotated dataset for brain tumor segmentation and classification. Scientific Data, 13(1):361, 2026. doi:10.1038/s41597-026-06753-y.">FRM+26</a>]</span>.
-BRISC aborda directamente las limitaciones de los datasets existentes al ofrecer 6.000 imágenes
-MRI T1 con contraste, distribuidas de forma balanceada entre cuatro clases — glioma, meningioma,
-tumor hipofisario y casos no tumorales — y tres planos anatómicos: axial, coronal y sagital.
-Las máscaras de segmentación pixel a pixel fueron anotadas y validadas por radiólogos y médicos
-certificados, con un coeficiente Dice de 0.924 entre anotaciones iniciales y verificadas por
-expertos <span id="id16">[<a class="reference internal" href="referencias_bibliograficas.html#id2" title="Amirreza Fateh, Yasin Rezvani, Sara Moayedi, Sadjad Rezvani, Fatemeh Fateh, Mansoor Fateh, and Vahid Abolghasemi. Brisc: annotated dataset for brain tumor segmentation and classification. Scientific Data, 13(1):361, 2026. doi:10.1038/s41597-026-06753-y.">FRM+26</a>]</span>.</p>
+Segmentation and Classification), publicado en Scientific Data de Nature Portfolio
+<span id="id16">[<a class="reference internal" href="referencias_bibliograficas.html#id2" title="Amirreza Fateh, Yasin Rezvani, Sara Moayedi, Sadjad Rezvani, Fatemeh Fateh, Mansoor Fateh, and Vahid Abolghasemi. Brisc: annotated dataset for brain tumor segmentation and classification. Scientific Data, 13(1):361, 2026. doi:10.1038/s41597-026-06753-y.">FRM+26</a>]</span>. BRISC aborda directamente las limitaciones de los datasets existentes
+al ofrecer 6.000 imágenes MRI T1 con contraste, distribuidas de forma balanceada entre cuatro
+clases — glioma, meningioma, tumor hipofisario y casos no tumorales — y tres planos anatómicos:
+axial, coronal y sagital. Las máscaras de segmentación pixel a pixel fueron anotadas y
+validadas por radiólogos y médicos certificados, con un coeficiente Dice de 0.924 entre
+anotaciones iniciales y verificadas por expertos <span id="id17">[<a class="reference internal" href="referencias_bibliograficas.html#id2" title="Amirreza Fateh, Yasin Rezvani, Sara Moayedi, Sadjad Rezvani, Fatemeh Fateh, Mansoor Fateh, and Vahid Abolghasemi. Brisc: annotated dataset for brain tumor segmentation and classification. Scientific Data, 13(1):361, 2026. doi:10.1038/s41597-026-06753-y.">FRM+26</a>]</span>.</p>
 <p>A pesar de que los propios autores de BRISC establecieron benchmarks con doce modelos de
 segmentación, identificamos dos gaps relevantes en su trabajo. Primero, el mejor modelo
 reportado — SaberNet — alcanzó un Weighted mIoU de 80.6%, dejando un margen de mejora
 significativo. Segundo, y más importante, ninguno de los benchmarks reportados analiza el
-rendimiento de segmentación desagregado por plano anatómico, a pesar de que BRISC cuenta
-con representación balanceada en los tres planos. Esta omisión es clínicamente relevante,
-dado que la morfología tumoral percibida varía considerablemente entre cortes axiales, coronales
-y sagitales, y un modelo robusto debería mantener rendimiento consistente independientemente
-del plano de adquisición <span id="id17">[<a class="reference internal" href="referencias_bibliograficas.html#id2" title="Amirreza Fateh, Yasin Rezvani, Sara Moayedi, Sadjad Rezvani, Fatemeh Fateh, Mansoor Fateh, and Vahid Abolghasemi. Brisc: annotated dataset for brain tumor segmentation and classification. Scientific Data, 13(1):361, 2026. doi:10.1038/s41597-026-06753-y.">FRM+26</a>]</span>.</p>
+rendimiento de segmentación desagregado por plano anatómico, a pesar de que BRISC cuenta con
+representación balanceada en los tres planos. Esta omisión es clínicamente relevante, dado que
+la morfología tumoral percibida varía considerablemente entre cortes axiales, coronales y
+sagitales, y un modelo robusto debería mantener rendimiento consistente independientemente del
+plano de adquisición <span id="id18">[<a class="reference internal" href="referencias_bibliograficas.html#id2" title="Amirreza Fateh, Yasin Rezvani, Sara Moayedi, Sadjad Rezvani, Fatemeh Fateh, Mansoor Fateh, and Vahid Abolghasemi. Brisc: annotated dataset for brain tumor segmentation and classification. Scientific Data, 13(1):361, 2026. doi:10.1038/s41597-026-06753-y.">FRM+26</a>]</span>. Adicionalmente, el análisis exploratorio de datos
+de este proyecto identificó un desplazamiento estadísticamente significativo en la distribución
+entre los conjuntos de entrenamiento y prueba del dataset, un fenómeno documentado en la
+literatura como un obstáculo real para la generalización de los modelos en imagen médica
+<span id="id19">[<a class="reference internal" href="referencias_bibliograficas.html#id17" title="Shawon Chakrabarty Kakon, Harishik Dev Singh Jamwal, and Saurabh Singh. Improving cross-domain generalization in brain MRIs via feature space stability regularization. Mathematics, 14(6):1082, 2026. doi:10.3390/math14061082.">KJS26</a>]</span>, <span id="id20">[<a class="reference internal" href="referencias_bibliograficas.html#id18" title="Aminu Musa, Rajesh Prasad, Peter Onwualu, and Monica Hernandez. A systematic review of cross-population shifts in medical imaging analysis with deep learning. Big Data and Cognitive Computing, 10(3):76, 2026. doi:10.3390/bdcc10030076.">MPOH26</a>]</span>.</p>
 </section>
+<hr class="docutils" />
 <section id="objetivos">
 <h2>1.6 Objetivos<a class="headerlink" href="#objetivos" title="Permalink to this heading">#</a></h2>
 <p><strong>Objetivo General</strong></p>
@@ -487,15 +508,15 @@ rendimiento de los modelos benchmark establecidos en términos de Weighted mIoU 
 <ol class="arabic simple">
 <li><p>Realizar un análisis exploratorio del dataset BRISC 2025 que caracterice la distribución
 de imágenes y máscaras por clase tumoral y plano anatómico.</p></li>
-<li><p>Reproducir y evaluar modelos de segmentación benchmark — U-Net, Attention U-Net, TransUNet
-y Swin-UNet — sobre el dataset BRISC 2025, estableciendo líneas base de comparación bajo
-condiciones estandarizadas de preprocesamiento y entrenamiento.</p></li>
+<li><p>Reproducir y evaluar modelos de segmentación benchmark — U-Net, Attention U-Net, TransUNet,
+UNet++ y DeepLabV3+ — sobre el dataset BRISC 2025, estableciendo líneas base de comparación
+bajo condiciones estandarizadas de preprocesamiento y entrenamiento.</p></li>
 <li><p>Diseñar e implementar una arquitectura de segmentación original, fundamentada en revisión
-de literatura reciente, que incorpore mecanismos novedosos para mejorar la delimitación de
-regiones tumorales en imágenes MRI T1.</p></li>
-<li><p>Evaluar el rendimiento del modelo propuesto mediante métricas estándar (mIoU, Dice Score)
-desagregadas por tipo de tumor y por plano anatómico, comparándolo sistemáticamente con los
-modelos benchmark.</p></li>
+de literatura reciente, que incorpore mecanismos de atención de canal y espacial para
+mejorar la delimitación de regiones tumorales en imágenes MRI T1.</p></li>
+<li><p>Evaluar el rendimiento del modelo propuesto mediante métricas estándar (Weighted mIoU,
+Dice Score) desagregadas por tipo de tumor y por plano anatómico, comparándolo
+sistemáticamente con los modelos benchmark.</p></li>
 <li><p>Analizar la capacidad de generalización entre planos anatómicos de los modelos evaluados,
 identificando patrones de rendimiento diferencial entre los planos axial, coronal y sagital.</p></li>
 </ol>
@@ -543,11 +564,11 @@ identificando patrones de rendimiento diferencial entre los planos axial, corona
       </div>
     </a>
     <a class="right-next"
-       href="Eda_base.html"
+       href="revision_literatura.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>3. Análisis Exploratorio de Datos</strong></p>
+        <p class="prev-next-title"><strong>2. Revisión de Literatura</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -20,9 +20,9 @@ Luis David Peñaranda Pérez
 
 ## Abstract
 
-Este trabajo presenta un estudio sistemático de segmentación pixel a pixel de tumores cerebrales en imágenes de Resonancia Magnética T1, utilizando el dataset BRISC 2025 — un conjunto de datos anotadas por radiólogos certificados, que incluye glioma, meningioma, tumor hipofisario y casos no tumorales en tres planos anatómicos. Se reproducen modelos benchmark establecidos (U-Net, Attention U-Net, TransUNet, Swin-UNet) y se propone una arquitectura original que supera el estado del arte reportado, contribuyendo además con un análisis inédito de rendimiento desagregado por plano anatómico.
+Este trabajo presenta un estudio sistemático de segmentación pixel a pixel de tumores cerebrales en imágenes de Resonancia Magnética T1, utilizando el dataset BRISC 2025 — un conjunto de datos anotado por radiólogos certificados que incluye glioma, meningioma, tumor hipofisario y casos no tumorales en tres planos anatómicos. Se reproducen y evalúan cinco modelos benchmark (U-Net, Attention U-Net, TransUNet, UNet++ y DeepLabV3+) bajo condiciones homogéneas de entrenamiento, superando en conjunto el Weighted mIoU de 80.6% reportado por los autores del dataset. A partir de los hallazgos de esa fase, se propone una arquitectura original fundamentada en los patrones de rendimiento observados, contribuyendo además con un análisis inédito de rendimiento desagregado por plano anatómico y por la interacción tipo tumoral × plano.
 
-**Keywords:** Segmentación semántica · Tumores cerebrales · MRI T1 · U-Net · Vision Transformer · BRISC 2025 · Diagnóstico asistido por IA
+**Keywords:** Segmentación semántica · Tumores cerebrales · MRI T1 · U-Net · UNet++ · BRISC 2025 · Diagnóstico asistido por IA
 
 
 ```{tableofcontents}
