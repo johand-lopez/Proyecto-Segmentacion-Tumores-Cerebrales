@@ -1,6 +1,6 @@
 # **Segmentación de Tumores Cerebrales en MRI mediante Aprendizaje Profundo**
 
-**Autores:**
+## **Autores:**
 
 Johan David Díaz López
 

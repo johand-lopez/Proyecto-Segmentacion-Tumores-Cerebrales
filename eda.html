@@ -378,7 +378,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspeccion-cualitativa-y-validacion-visual-de-anotaciones">3.9 Inspección Cualitativa y Validación Visual de Anotaciones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sintesis-del-eda-y-decisiones-para-el-preprocesamiento">Síntesis del EDA y Decisiones para el Preprocesamiento</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-principales">Hallazgos principales</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decisiones-de-preprocesamiento">Decisiones de preprocesamiento</a></li>
 </ul>
 </li>
 </ul>
@@ -2041,20 +2040,6 @@ Variable                        Mann-Whitney U       p-MW    KS stat       p-KS 
 </tbody>
 </table>
 </section>
-<section id="decisiones-de-preprocesamiento">
-<h3>Decisiones de preprocesamiento<a class="headerlink" href="#decisiones-de-preprocesamiento" title="Permalink to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Resolución objetivo:</strong> 256×256 píxeles (balance entre detalle y eficiencia computacional para RTX 3050 4GB VRAM)</p></li>
-<li><p><strong>Conversión a escala de grises:</strong> 1 canal para todas las imágenes</p></li>
-<li><p><strong>Normalización:</strong> Min-max [0, 1] por imagen individual</p></li>
-<li><p><strong>Binarización de máscaras:</strong> Umbral &gt; 0.5 (post-normalización a [0, 1])</p></li>
-<li><p><strong>Augmentación (solo train):</strong> Rotaciones, flips, ajustes de brillo/contraste</p></li>
-<li><p><strong>Loss function recomendada:</strong> Dice Loss o Combo Loss (Dice + BCE) por el desbalance extremo</p></li>
-<li><p><strong>Métricas obligatorias:</strong> IoU por clase, Weighted mIoU, Dice Score, análisis por plano</p></li>
-<li><p><strong>Split:</strong> Se respeta el split original de BRISC para comparabilidad con benchmarks publicados</p></li>
-</ol>
-<p>Estas decisiones se implementarán en la siguiente fase del proyecto (Preprocesamiento y DataLoaders).</p>
-</section>
 </section>
 </section>
 
@@ -2145,7 +2130,6 @@ Variable                        Mann-Whitney U       p-MW    KS stat       p-KS 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspeccion-cualitativa-y-validacion-visual-de-anotaciones">3.9 Inspección Cualitativa y Validación Visual de Anotaciones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sintesis-del-eda-y-decisiones-para-el-preprocesamiento">Síntesis del EDA y Decisiones para el Preprocesamiento</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hallazgos-principales">Hallazgos principales</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decisiones-de-preprocesamiento">Decisiones de preprocesamiento</a></li>
 </ul>
 </li>
 </ul>
