@@ -4,11 +4,11 @@
 
 Johan David Díaz López
 
+Luis David Peñaranda Pérez
+
 David Ricardo Márquez Luna
 
 Cristian Camilo Linero Cantillo
-
-Luis David Peñaranda Pérez
 
 **Universidad:** Universidad del Norte
 
